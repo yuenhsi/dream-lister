@@ -22,6 +22,7 @@
 		5A726BA91E26C155003047E7 /* Image+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A726BA11E26C155003047E7 /* Image+CoreDataClass.swift */; };
 		5A726BAA1E26C155003047E7 /* Image+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A726BA21E26C155003047E7 /* Image+CoreDataProperties.swift */; };
 		5A726BAE1E26D987003047E7 /* MaterialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A726BAD1E26D987003047E7 /* MaterialView.swift */; };
+		5A726BB11E26DB2D003047E7 /* ItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A726BB01E26DB2D003047E7 /* ItemCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		5A726BA11E26C155003047E7 /* Image+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5A726BA21E26C155003047E7 /* Image+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Image+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5A726BAD1E26D987003047E7 /* MaterialView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MaterialView.swift; sourceTree = "<group>"; };
+		5A726BB01E26DB2D003047E7 /* ItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,8 +76,9 @@
 		5A3387951E26B44800B90C5D /* dream-lister */ = {
 			isa = PBXGroup;
 			children = (
-				5A726BAC1E26D974003047E7 /* View */,
 				5A726B961E26C029003047E7 /* Model */,
+				5A726BAC1E26D974003047E7 /* View */,
+				5A726BAF1E26DB09003047E7 /* Controller */,
 				5A3387961E26B44800B90C5D /* AppDelegate.swift */,
 				5A3387981E26B44800B90C5D /* MainVC.swift */,
 				5A33879A1E26B44800B90C5D /* Main.storyboard */,
@@ -114,8 +117,16 @@
 			isa = PBXGroup;
 			children = (
 				5A726BAD1E26D987003047E7 /* MaterialView.swift */,
+				5A726BB01E26DB2D003047E7 /* ItemCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		5A726BAF1E26DB09003047E7 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A726BB11E26DB2D003047E7 /* ItemCell.swift in Sources */,
 				5A726BA51E26C155003047E7 /* ItemType+CoreDataClass.swift in Sources */,
 				5A726BA41E26C155003047E7 /* Store+CoreDataProperties.swift in Sources */,
 				5A3387991E26B44800B90C5D /* MainVC.swift in Sources */,
