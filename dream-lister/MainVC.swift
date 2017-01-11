@@ -15,6 +15,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     @IBOutlet weak var tableView: UITableView!
     
     var controller: NSFetchedResultsController<Item>!
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +23,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         tableView.delegate = self
         tableView.dataSource = self
         
-        attemptFetch()
 //        getSampleData()
+        attemptFetch()
     }
 
     override func didReceiveMemoryWarning() {
@@ -66,7 +67,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         let dateSort = NSSortDescriptor(key: "created", ascending: false)
         fetchRequest.sortDescriptors = [dateSort]
         
-        controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         
         do {
             
@@ -110,6 +111,26 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
                 tableView.insertRows(at: [indexPath], with: .fade)
             }
         }
+    }
+    
+    func getSampleData() {
+        
+        let item = Item(context: appDelegate.persistentContainer.viewContext)
+        item.title = "Dell S2417DG"
+        item.price = 700
+        item.details = "So I can finally play runescape again."
+        
+        let item2 = Item(context: appDelegate.persistentContainer.viewContext)
+        item2.title = "Sketch"
+        item2.price = 100
+        item2.details = "I'll design an app that allows the blind to see, the mute to sing, and the amputee to dance!"
+        
+        let item3 = Item(context: appDelegate.persistentContainer.viewContext)
+        item3.title = "All Clad"
+        item3.price = 2000
+        item3.details = "Instant mac n' cheese would taste better in this."
+        
+        appDelegate.saveContext()
     }
 
 }
