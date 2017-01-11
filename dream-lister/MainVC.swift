@@ -21,6 +21,9 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         // Do any additional setup after loading the view, typically from a nib.
         tableView.delegate = self
         tableView.dataSource = self
+        
+        attemptFetch()
+//        getSampleData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,12 +31,33 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         // Dispose of any resources that can be recreated.
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        
+        if let sections = controller.sections {
+            return sections.count
+        }
+        return 0
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+        if let sections = controller.sections {
+            let sectionInfo = sections[section]
+            return sectionInfo.numberOfObjects
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ItemCell") as! ItemCell
+        configureCell(cell: cell, indexPath: indexPath)
+        return cell
+    }
+    
+    func configureCell(cell: ItemCell, indexPath: IndexPath) {
+        let item = controller.object(at: indexPath)
+        cell.updateUI(item: item)
     }
     
     func attemptFetch() {
@@ -75,8 +99,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
             }
         case .update:
             if let indexPath = indexPath {
-                let _ = tableView.cellForRow(at: indexPath) as! ItemCell
-                // update table
+                let cell = tableView.cellForRow(at: indexPath) as! ItemCell
+                configureCell(cell: cell, indexPath: indexPath)
             }
         case .move:
             if let indexPath = indexPath {
@@ -85,6 +109,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
             if let indexPath = newIndexPath {
                 tableView.insertRows(at: [indexPath], with: .fade)
             }
+        }
     }
 
 }
