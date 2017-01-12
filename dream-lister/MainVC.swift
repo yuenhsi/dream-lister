@@ -76,8 +76,20 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     func attemptFetch() {
         
         let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-        let dateSort = NSSortDescriptor(key: "created", ascending: false)
-        fetchRequest.sortDescriptors = [dateSort]
+        var sortParams: NSSortDescriptor!
+        
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            sortParams = NSSortDescriptor(key: "created", ascending: false)
+        case 1:
+            sortParams = NSSortDescriptor(key: "price", ascending: true)
+        case 2:
+            sortParams = NSSortDescriptor(key: "title", ascending: true)
+        default:
+            break
+        }
+        
+        fetchRequest.sortDescriptors = [sortParams]
         
         controller = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: appDelegate.persistentContainer.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         controller.delegate = self
@@ -124,6 +136,11 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
                 tableView.insertRows(at: [indexPath], with: .fade)
             }
         }
+    }
+    
+    @IBAction func segmentedCtrlPressed(_ sender: Any) {
+        attemptFetch()
+        tableView.reloadData()
     }
     
     func getSampleData() {
