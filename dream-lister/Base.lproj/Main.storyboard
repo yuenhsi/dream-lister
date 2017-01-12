@@ -171,6 +171,9 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rqI-ZV-LiO">
                                 <rect key="frame" x="16" y="72" width="86" height="86"/>
+                                <connections>
+                                    <action selector="imageBtnPressed:" destination="Frf-yr-o1L" eventType="touchUpInside" id="19R-at-wyT"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vl8-60-pHO" customClass="CustomTextField" customModule="dream_lister" customModuleProvider="target">
                                 <rect key="frame" x="110" y="74" width="194" height="35"/>
@@ -227,6 +230,9 @@
                                 <state key="normal" title="Save Item">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveBtnPressed:" destination="Frf-yr-o1L" eventType="touchUpInside" id="Htc-2m-SyZ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -265,6 +271,7 @@
                         <outlet property="detailsField" destination="uxx-f3-5DY" id="RAI-Nw-Q57"/>
                         <outlet property="priceField" destination="otk-hW-QeL" id="cZl-63-bn4"/>
                         <outlet property="storePicker" destination="zRa-Lo-EYU" id="d5n-sZ-ENb"/>
+                        <outlet property="thumbImage" destination="Qkz-7e-YhV" id="l48-TM-sOM"/>
                         <outlet property="titleField" destination="vl8-60-pHO" id="vPL-4S-hYL"/>
                     </connections>
                 </viewController>

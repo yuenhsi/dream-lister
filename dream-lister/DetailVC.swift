@@ -15,6 +15,7 @@ class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var titleField: CustomTextField!
     @IBOutlet weak var priceField: CustomTextField!
     @IBOutlet weak var detailsField: CustomTextField!
+    @IBOutlet weak var thumbImage: UIImageView!
     
     var stores: [Store]!
     
@@ -28,7 +29,7 @@ class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         storePicker.delegate = self
         storePicker.dataSource = self
         
-        loadData()
+//        loadData()
         getStores()
     }
 
@@ -72,4 +73,21 @@ class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         appDelegate.saveContext()
     }
     
+    @IBAction func saveBtnPressed(_ sender: Any) {
+        
+        let item = Item(context: appDelegate.persistentContainer.viewContext)
+        item.created = NSDate()
+        item.details = detailsField.text
+        item.price = NSString(string: priceField.text!).doubleValue
+        item.title = titleField.text
+        let store = stores[storePicker.selectedRow(inComponent: 0)]
+        item.toStore = store
+        
+        appDelegate.saveContext()
+        
+        let _ = navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func imageBtnPressed(_ sender: Any) {
+    }
 }
