@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -26,11 +27,18 @@ class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         }
         storePicker.delegate = self
         storePicker.dataSource = self
+        
+        loadData()
+        getStores()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return stores[row].name
     }
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -39,6 +47,29 @@ class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return stores.count
+    }
+    
+    func getStores() {
+        let fetchRequest: NSFetchRequest<Store> = Store.fetchRequest()
+        
+        do {
+            self.stores = try appDelegate.persistentContainer.viewContext.fetch(fetchRequest)
+            self.storePicker.reloadAllComponents()
+        } catch {
+            print(error)
+        }
+    }
+    
+    func loadData() {
+        let store1 = Store(context: appDelegate.persistentContainer.viewContext)
+        store1.name = "Amazon"
+        let store2 = Store(context: appDelegate.persistentContainer.viewContext)
+        store2.name = "American ego"
+        let store3 = Store(context: appDelegate.persistentContainer.viewContext)
+        store3.name = "Detroit"
+        let store4 = Store(context: appDelegate.persistentContainer.viewContext)
+        store4.name = "Mainland China"
+        appDelegate.saveContext()
     }
     
 }

@@ -15,7 +15,6 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
     @IBOutlet weak var tableView: UITableView!
     
     var controller: NSFetchedResultsController<Item>!
-    let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
