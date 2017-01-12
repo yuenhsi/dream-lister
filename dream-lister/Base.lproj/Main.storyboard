@@ -39,7 +39,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="150" id="lRz-Lb-LPF" customClass="ItemCell" customModule="dream_lister" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ItemCell" rowHeight="150" id="lRz-Lb-LPF" customClass="ItemCell" customModule="dream_lister" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="288" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lRz-Lb-LPF" id="lZt-hq-jbj">
@@ -49,7 +49,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UbU-Mo-G14">
                                                     <rect key="frame" x="8" y="8" width="272" height="134"/>
                                                     <subviews>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Dell" translatesAutoresizingMaskIntoConstraints="NO" id="T0s-oP-tZQ">
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imagePick" translatesAutoresizingMaskIntoConstraints="NO" id="T0s-oP-tZQ">
                                                             <rect key="frame" x="8" y="8" width="118" height="118"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="118" id="4qw-Wb-bZK"/>
@@ -265,6 +265,9 @@
                     <navigationItem key="navigationItem" title="Add / Edit" id="2Yi-eK-OMC">
                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="T4B-7J-NLw">
                             <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="deleteBtnPressed:" destination="Frf-yr-o1L" id="UHX-lA-z98"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -304,7 +307,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Dell" width="1500" height="1500"/>
         <image name="imagePick" width="300" height="300"/>
     </resources>
     <inferredMetricsTieBreakers>

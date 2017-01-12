@@ -39,6 +39,19 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFe
         return 0
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = controller.object(at: indexPath)
+        performSegue(withIdentifier: "DetailVC", sender: item)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? DetailVC {
+            if let item = sender as? Item {
+                vc.currentItem = item
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if let sections = controller.sections {

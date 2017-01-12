@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     @IBOutlet weak var storePicker: UIPickerView!
     @IBOutlet weak var titleField: CustomTextField!
@@ -18,6 +18,8 @@ class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     @IBOutlet weak var thumbImage: UIImageView!
     
     var stores: [Store]!
+    var currentItem: Item?
+    var imagePicker: UIImagePickerController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,9 +30,27 @@ class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
         }
         storePicker.delegate = self
         storePicker.dataSource = self
-        
-//        loadData()
         getStores()
+        
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        
+        if currentItem != nil {
+            titleField.text = currentItem!.title
+            priceField.text = "\(currentItem!.price)"
+            detailsField.text = currentItem!.details
+            if let img = currentItem!.toImage?.image as? UIImage {
+                thumbImage.image = img
+            }
+            
+            if let name = currentItem!.toStore?.name {
+                for (index, store) in stores.enumerated() {
+                    if store.name == name {
+                        storePicker.selectRow(index, inComponent: 0, animated: true)
+                    }
+                }
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -75,13 +95,20 @@ class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
     @IBAction func saveBtnPressed(_ sender: Any) {
         
-        let item = Item(context: appDelegate.persistentContainer.viewContext)
+        var item: Item!
+        if currentItem != nil {
+            item = currentItem
+        } else {
+            item = Item(context: appDelegate.persistentContainer.viewContext)
+        }
         item.created = NSDate()
         item.details = detailsField.text
         item.price = NSString(string: priceField.text!).doubleValue
         item.title = titleField.text
         let store = stores[storePicker.selectedRow(inComponent: 0)]
         item.toStore = store
+        item.toImage = Image(context: appDelegate.persistentContainer.viewContext)
+        item.toImage!.image = thumbImage.image
         
         appDelegate.saveContext()
         
@@ -89,5 +116,33 @@ class DetailVC: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     @IBAction func imageBtnPressed(_ sender: Any) {
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let img = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            thumbImage.image = img
+        }
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func deleteBtnPressed(_ sender: Any) {
+        
+        if currentItem != nil {
+            appDelegate.persistentContainer.viewContext.delete(currentItem!)
+            appDelegate.saveContext()
+            
+        }
+        let _ = navigationController?.popViewController(animated: true)
     }
 }
+
+
+
+
+
+
+
+
+
+
